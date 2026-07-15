@@ -160,18 +160,26 @@ $(function () {
         const tab = $(this).data('tab');
 
         $('.about-tab-btn')
-            .removeClass('text-primary')
-            .addClass('text-heading/50')
-            .find('.about-tab-indicator')
-            .remove();
+            .removeClass('border-orange-500 text-orange-500')
+            .addClass('border-transparent text-slate-500');
 
-        $(this).removeClass('text-heading/50').addClass('text-primary');
-        if (!$(this).find('.about-tab-indicator').length) {
-            $(this).append('<span class="about-tab-indicator absolute -bottom-px left-0 h-0.5 w-full bg-primary"></span>');
-        }
+        $(this).removeClass('border-transparent text-slate-500').addClass('border-orange-500 text-orange-500');
 
         $('.about-tab-panel').addClass('hidden');
         $(`.about-tab-panel[data-panel="${tab}"]`).removeClass('hidden');
+
+        if (tab === 'contact') {
+            $('.about-slider-col').addClass('hidden');
+            $('.about-left-col').addClass('lg:col-span-2');
+        } else {
+            $('.about-slider-col').removeClass('hidden');
+            $('.about-left-col').removeClass('lg:col-span-2');
+        }
+
+        const $content = $('#about-tab-content');
+        $content.removeClass('animate-fade-in');
+        void $content[0].offsetWidth;
+        $content.addClass('animate-fade-in');
     });
 
     /* ---------------------------------------------------------
@@ -189,8 +197,8 @@ $(function () {
         $slides.removeClass('opacity-100').addClass('opacity-0');
         $slides.eq(currentSlide).removeClass('opacity-0').addClass('opacity-100');
 
-        $dots.removeClass('bg-white w-6').addClass('bg-white/50');
-        $dots.eq(currentSlide).removeClass('bg-white/50').addClass('bg-white w-6');
+        $dots.removeClass('bg-orange-500 scale-110').addClass('bg-white/60');
+        $dots.eq(currentSlide).removeClass('bg-white/60').addClass('bg-orange-500 scale-110');
     }
 
     function startAutoSlide() {
@@ -199,8 +207,6 @@ $(function () {
     }
 
     if ($slides.length) {
-        $('#about-slider-next').on('click', () => { goToSlide(currentSlide + 1); startAutoSlide(); });
-        $('#about-slider-prev').on('click', () => { goToSlide(currentSlide - 1); startAutoSlide(); });
         $dots.on('click', function () { goToSlide($(this).data('slide')); startAutoSlide(); });
         startAutoSlide();
     }
