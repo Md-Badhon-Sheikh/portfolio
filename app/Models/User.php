@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'avatar'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,5 +28,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Public URL for the user's avatar, or null if none uploaded.
+     */
+    public function avatarUrl(): ?string
+    {
+        return $this->avatar ? asset('storage/'.$this->avatar) : null;
+    }
+
+    /**
+     * First letter of the user's name, used as an avatar fallback.
+     */
+    public function initial(): string
+    {
+        return mb_strtoupper(mb_substr($this->name, 0, 1));
     }
 }
