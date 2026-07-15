@@ -25,11 +25,10 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-                    <a href="#" class="btn-primary">
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+                    <a href="#" class="bg-[#F57C20] text-white px-8 py-3 shadow-2xl rounded-lg font-medium hover:bg-orange-600 transition active:scale-95 cursor-pointer">
                         Download CV
                     </a>
-                    <a href="#contact" class="btn-outline">Contact</a>
+                    <a href="#contact" class="border-1 border-[#F57C20] text-[#14295F] shadow-2xl px-8 py-3 rounded-lg font-medium hover:bg-orange-50 transition active:scale-95 cursor-pointer">Contact</a>
                 </div>
             </div>
 
@@ -51,7 +50,7 @@
 
     {{-- Floating stats card — pill-shaped, overlapping the hero bottom edge --}}
     <div class="relative z-10 mx-auto -mt-12 mb-20 max-w-7xl px-5 md:-mt-20 lg:px-8">
-        <div class="reveal grid grid-cols-3 gap-2 rounded-2xl border border-slate-100 bg-white px-2 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:gap-10 md:rounded-full md:px-12">
+        <div class="reveal grid grid-cols-3 gap-2 rounded-2xl border border-slate-100 bg-white px-2 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:gap-10 md:rounded-full md:px-12" style="margin-top: 150px;">
             @php
                 $stats = [
                     [
@@ -69,7 +68,7 @@
                 ];
             @endphp
             @foreach ($stats as $stat)
-                <div class="flex flex-col items-center justify-center gap-2 text-center md:flex-row md:justify-start md:gap-4 md:text-left">
+                <div class="flex flex-col items-center justify-center gap-2 text-center md:flex-row md:justify-start md:gap-4 md:text-left" >
                     <div class="rounded-full bg-[#F57C20] p-2 text-white shadow-md md:p-4">
                         <svg class="h-5 w-5 md:h-8 md:w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $stat['svg'] !!}</svg>
                     </div>
