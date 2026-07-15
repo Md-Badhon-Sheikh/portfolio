@@ -1,8 +1,9 @@
 {{-- ============================================================
      UI Design Gallery Section
-     CSS-columns masonry grid, hover zoom, click opens lightbox (app.js)
+     Flex-wrap masonry grid of real design shots, hover zoom,
+     click opens lightbox (app.js)
      ============================================================ --}}
-<section id="gallery" class="bg-orange-50/50 py-24">
+<section id="gallery" class="bg-white py-24">
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
 
         <div class="reveal mx-auto max-w-2xl text-center">
@@ -10,29 +11,32 @@
             <h2 class="section-title">My Amazing Works</h2>
         </div>
 
-        <div class="mt-14 columns-2 gap-5 sm:columns-3 lg:columns-4">
+        <div class="mt-14 flex flex-wrap gap-4 after:content-[''] after:grow-[99999] after:min-w-[200px]">
             @php
                 $gallery = [
-                    ['title' => 'Shoe Store Landing', 'h' => 'h-56', 'from' => '#ff7a00', 'to' => '#ffb27a'],
-                    ['title' => 'Finance Dashboard', 'h' => 'h-72', 'from' => '#1e2a5e', 'to' => '#3a4a8f'],
-                    ['title' => 'Mobile App Screens', 'h' => 'h-64', 'from' => '#7ac9ff', 'to' => '#1e2a5e'],
-                    ['title' => 'Business Landing Page', 'h' => 'h-48', 'from' => '#ffd27a', 'to' => '#ff7a00'],
-                    ['title' => 'Analytics Widgets', 'h' => 'h-60', 'from' => '#ff9a5a', 'to' => '#1e2a5e'],
-                    ['title' => 'Portfolio Homepage', 'h' => 'h-72', 'from' => '#7ac9ff', 'to' => '#ff7a00'],
-                    ['title' => 'Food Delivery App', 'h' => 'h-52', 'from' => '#1e2a5e', 'to' => '#7ac9ff'],
-                    ['title' => 'Architecture Studio Site', 'h' => 'h-64', 'from' => '#ffb27a', 'to' => '#1e2a5e'],
+                    ['title' => 'Modern business website', 'src' => 'uiux1.webp', 'w' => 'w-96'],
+                    ['title' => 'Food service website', 'src' => 'uiux2.webp', 'w' => 'w-64'],
+                    ['title' => 'Mobile app screens', 'src' => 'uiux3.webp', 'w' => 'w-72'],
+                    ['title' => 'QR code system UI', 'src' => 'uiux4.webp', 'w' => 'w-80'],
+                    ['title' => 'Portfolio landing page', 'src' => 'uiux5.webp', 'w' => 'w-[500px]'],
+                    ['title' => 'Shoe product page', 'src' => 'uiux6.webp', 'w' => 'w-72'],
+                    ['title' => 'Dark mode mobile app', 'src' => 'uiux7.webp', 'w' => 'w-60'],
+                    ['title' => 'Business coaching website', 'src' => 'uiux8.webp', 'w' => 'w-96'],
+                    ['title' => 'Sneaker store hero', 'src' => 'uiux9.webp', 'w' => 'w-80'],
+                    ['title' => 'Electronics e-commerce', 'src' => 'uiux10.webp', 'w' => 'w-64'],
+                    ['title' => 'Settings UI profile', 'src' => 'uiux11.webp', 'w' => 'w-72'],
+                    ['title' => 'Analytics dashboard', 'src' => 'uiux12.webp', 'w' => 'w-96'],
+                    ['title' => 'Analytics dashboard', 'src' => 'uiux13.webp', 'w' => 'w-96'],
                 ];
             @endphp
             @foreach ($gallery as $item)
                 <button type="button"
-                    class="gallery-item group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl {{ $item['h'] }} shadow-[0_10px_30px_-12px_rgba(30,42,94,0.25)]"
+                    class="gallery-item group relative flex-auto h-40 md:h-56 {{ $item['w'] }} overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
                     data-title="{{ $item['title'] }}"
-                    data-from="{{ $item['from'] }}"
-                    data-to="{{ $item['to'] }}">
-                    <span class="absolute inset-0 block transition duration-500 group-hover:scale-110" style="background: linear-gradient(135deg, {{ $item['from'] }}, {{ $item['to'] }});"></span>
-                    <span class="absolute inset-0 flex items-end bg-gradient-to-t from-heading/70 via-transparent to-transparent p-4 opacity-0 transition duration-300 group-hover:opacity-100">
-                        <span class="text-left text-sm font-semibold text-white">{{ $item['title'] }}</span>
-                    </span>
+                    data-src="{{ asset('images/gallery/' . $item['src']) }}">
+                    <img src="{{ asset('images/gallery/' . $item['src']) }}" alt="{{ $item['title'] }}" loading="lazy"
+                        class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
                 </button>
             @endforeach
         </div>
@@ -45,7 +49,9 @@
         <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
     <div class="w-full max-w-2xl overflow-hidden rounded-2xl">
-        <div id="lightbox-image" class="flex aspect-[4/3] w-full items-center justify-center"></div>
+        <div id="lightbox-image" class="flex aspect-[4/3] w-full items-center justify-center bg-heading/50">
+            <img id="lightbox-img" src="" alt="" class="h-full w-full object-cover">
+        </div>
         <div class="bg-white p-5 text-center">
             <h4 id="lightbox-title" class="text-lg font-bold text-heading"></h4>
         </div>

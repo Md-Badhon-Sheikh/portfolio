@@ -14,6 +14,7 @@
     @include('frontend.sections.skills')
     @include('frontend.sections.portfolio')
     @include('frontend.sections.gallery')
+    @include('frontend.sections.experience')
     @include('frontend.sections.contact')
     @include('frontend.sections.footer')
 @endsection

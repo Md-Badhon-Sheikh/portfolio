@@ -10,6 +10,7 @@
         ['label' => 'Skills', 'href' => '#skills'],
         ['label' => 'Portfolio', 'href' => '#portfolio'],
         ['label' => 'Gallery', 'href' => '#gallery'],
+        ['label' => 'Experience', 'href' => '#experience'],
         ['label' => 'Contact', 'href' => '#contact'],
     ];
 @endphp

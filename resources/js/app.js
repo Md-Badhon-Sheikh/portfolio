@@ -238,11 +238,10 @@ $(function () {
 
     $('.gallery-item').on('click', function () {
         const title = $(this).data('title');
-        const from = $(this).data('from');
-        const to = $(this).data('to');
+        const src = $(this).data('src');
 
         $('#lightbox-title').text(title);
-        $('#lightbox-image').css('background', `linear-gradient(135deg, ${from}, ${to})`);
+        $('#lightbox-img').attr('src', src).attr('alt', title);
         $lightbox.removeClass('hidden').addClass('flex');
         $('body').css('overflow', 'hidden');
     });
