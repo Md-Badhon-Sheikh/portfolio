@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand palette (see design brief) */
+    --color-primary: #ff7a00;
+    --color-primary-dark: #e56c00;
+    --color-heading: #1e2a5e;
+    --color-body: #555555;
+    --color-page: #fafafa;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 96px;
+    }
+
+    body {
+        background-color: var(--color-page);
+        color: var(--color-body);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--color-heading);
+    }
+}
+
+@layer components {
+    /* Section heading kicker, e.g. "WHY CHOOSE ME" */
+    .section-kicker {
+        @apply inline-block text-primary font-semibold text-sm tracking-widest uppercase mb-3;
+    }
+
+    .section-title {
+        @apply text-3xl md:text-4xl font-bold text-heading;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3
+               font-semibold text-white shadow-lg shadow-orange-500/25 transition
+               hover:bg-primary-dark hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-heading/15 px-7 py-3
+               font-semibold text-heading transition
+               hover:border-primary hover:text-primary hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    .card-surface {
+        @apply rounded-2xl bg-white shadow-[0_10px_40px_-15px_rgba(30,42,94,0.15)];
+    }
+
+    /* Reveal-on-scroll animation utility, toggled by app.js via IntersectionObserver */
+    .reveal {
+        @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+    }
+    .reveal.reveal-left { @apply -translate-x-8 translate-y-0; }
+    .reveal.reveal-right { @apply translate-x-8 translate-y-0; }
+    .reveal.in-view { @apply opacity-100 translate-x-0 translate-y-0; }
+
+    /* Animated skill progress bar fill */
+    .skill-bar-fill {
+        @apply h-full rounded-full bg-primary transition-all duration-1000 ease-out;
+        width: 0%;
+    }
+}
+
+@layer utilities {
+    .text-heading { color: var(--color-heading); }
+    .text-body { color: var(--color-body); }
+    .bg-page { background-color: var(--color-page); }
+}
