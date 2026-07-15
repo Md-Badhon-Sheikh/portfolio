@@ -3,47 +3,34 @@
      Two column: intro/name/CTA (left) — photo with circle shapes (right)
      Followed by a floating stats card (years / projects / support)
      ============================================================ --}}
-<section id="home" class="relative overflow-hidden bg-gradient-to-b from-orange-50/60 to-page pt-36 pb-0 lg:pt-44">
+<section id="home" class="relative overflow-hidden bg-[#FDF8F7] pt-12 pb-0 lg:pt-16">
 
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
             {{-- Left: intro text --}}
-            <div class="reveal reveal-left text-center lg:text-left">
-                <p class="mb-3 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                    <span class="h-px w-8 bg-primary"></span> Hi, I'm
-                </p>
-                <h1 class="text-4xl font-bold leading-tight text-heading sm:text-5xl lg:text-6xl">
-                    Mohammad Badhon
-                </h1>
-                <p class="mt-3 text-xl font-semibold text-heading/80 sm:text-2xl">
-                    Web Developer &amp; Designer
-                </p>
-                <p class="mx-auto mt-4 max-w-md text-base leading-relaxed text-body lg:mx-0">
-                    Laravel, PHP, and front-end specialist with strong UI/UX instincts —
-                    creating fast, functional, and visually compelling digital experiences.
+            <div class="reveal reveal-left space-y-6 text-center lg:text-left">
+                <h3 class="text-orange-500 text-xl font-bold">Hi I'm</h3>
+                <h1 class="text-[#14295F] text-5xl md:text-7xl font-extrabold leading-tight">Badhon Sheikh</h1>
+                <h2 class="text-[#14295F] text-2xl md:text-3xl font-bold">Web Developer and Designer</h2>
+                <p class="text-[#14295F] text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                    React, Django, and WordPress specialist with strong UI/UX design skills—creating
+                    fast, functional, and visually compelling digital experiences.
                 </p>
 
-                <div class="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-                    <a href="#" class="bg-[#F57C20] text-white px-8 py-3 shadow-2xl rounded-lg font-medium hover:bg-orange-600 transition active:scale-95 cursor-pointer">
+                <div class="flex flex-wrap gap-6 justify-center lg:justify-start pt-4">
+                    <a href="{{ asset('mycv.pdf') }}" target="_blank" rel="noopener noreferrer" class="bg-[#F57C20] text-white px-8 py-3 shadow-2xl rounded-lg font-medium hover:bg-orange-600 transition active:scale-95 cursor-pointer">
                         Download CV
                     </a>
-                    <a href="#contact" class="border-1 border-[#F57C20] text-[#14295F] shadow-2xl px-8 py-3 rounded-lg font-medium hover:bg-orange-50 transition active:scale-95 cursor-pointer">Contact</a>
+                    <a href="https://wa.me/8801642874989" target="_blank" rel="noopener noreferrer" class="border-2 border-[#F57C20] text-[#14295F] shadow-2xl px-8 py-3 rounded-lg font-medium hover:bg-orange-50 transition active:scale-95 cursor-pointer">
+                        Contact
+                    </a>
                 </div>
             </div>
 
-            {{-- Right: photo with circle shapes --}}
-            <div class="reveal reveal-right relative mx-auto flex h-72 w-72 items-center justify-center sm:h-96 sm:w-96 lg:mx-0 lg:ml-auto">
-                <span class="absolute inset-0 translate-x-6 translate-y-6 rounded-full bg-orange-100"></span>
-                <span class="absolute inset-4 rounded-full bg-orange-200/70"></span>
-                <div class="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-heading/90 shadow-2xl">
-                    <svg viewBox="0 0 200 200" class="h-[85%] w-[85%]" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="78" r="38" fill="#fff" fill-opacity="0.12"/>
-                        <path d="M28 192c0-46 32-77 72-77s72 31 72 77" fill="#fff" fill-opacity="0.12"/>
-                        <circle cx="100" cy="78" r="38" fill="#ff7a00" fill-opacity="0.85"/>
-                        <path d="M28 192c0-46 32-77 72-77s72 31 72 77" fill="#ff7a00" fill-opacity="0.55"/>
-                    </svg>
-                </div>
+            {{-- Right: photo --}}
+            <div class="reveal reveal-right relative flex justify-center items-end h-auto">
+                <img src="{{ asset('images/hero/profile.webp') }}" alt="Alvee" class="relative z-10 h-full max-h-[520px] object-cover">
             </div>
         </div>
     </div>

@@ -10,16 +10,12 @@ $(function () {
     });
 
     /* ---------------------------------------------------------
-     * Sticky navbar shrink + shadow on scroll
+     * Sticky navbar shadow on scroll
      * ------------------------------------------------------- */
     const $headerInner = $('#site-header-inner');
 
     function handleHeaderScroll() {
-        if ($(window).scrollTop() > 30) {
-            $headerInner.addClass('mt-0 !py-2.5');
-        } else {
-            $headerInner.removeClass('mt-0 !py-2.5');
-        }
+        $headerInner.toggleClass('shadow-[0_4px_20px_-8px_rgba(20,41,95,0.15)]', $(window).scrollTop() > 30);
     }
     $(window).on('scroll', handleHeaderScroll);
     handleHeaderScroll();
