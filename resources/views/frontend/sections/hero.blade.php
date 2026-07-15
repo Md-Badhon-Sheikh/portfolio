@@ -3,7 +3,7 @@
      Two column: intro/name/CTA (left) — photo with circle shapes (right)
      Followed by a floating stats card (years / projects / support)
      ============================================================ --}}
-<section id="home" class="relative overflow-hidden bg-gradient-to-b from-orange-50/60 to-page pt-36 pb-28 lg:pt-44">
+<section id="home" class="relative overflow-hidden bg-gradient-to-b from-orange-50/60 to-page pt-36 pb-0 lg:pt-44">
 
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
@@ -49,26 +49,35 @@
         </div>
     </div>
 
-    {{-- Floating stats card --}}
-    <div class="reveal mx-auto mt-16 max-w-4xl px-5 lg:px-8">
-        <div class="card-surface grid grid-cols-1 divide-y divide-heading/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+    {{-- Floating stats card — pill-shaped, overlapping the hero bottom edge --}}
+    <div class="relative z-10 mx-auto -mt-12 mb-20 max-w-7xl px-5 md:-mt-20 lg:px-8">
+        <div class="reveal grid grid-cols-3 gap-2 rounded-2xl border border-slate-100 bg-white px-2 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:gap-10 md:rounded-full md:px-12">
             @php
                 $stats = [
-                    ['icon' => 'M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z', 'value' => 2, 'suffix' => '+', 'label' => 'Years Experience'],
-                    ['icon' => 'M4 6h16M4 12h16M4 18h10', 'value' => 55, 'suffix' => '+', 'label' => 'Projects Done'],
-                    ['icon' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', 'value' => 24, 'suffix' => '/7', 'label' => 'Support'],
+                    [
+                        'svg' => '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
+                        'value' => 2, 'suffix' => ' Years', 'label' => 'Experience',
+                    ],
+                    [
+                        'svg' => '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+                        'value' => 55, 'suffix' => '+', 'label' => 'Projects',
+                    ],
+                    [
+                        'svg' => '<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>',
+                        'value' => 24, 'suffix' => '/7', 'label' => 'Support',
+                    ],
                 ];
             @endphp
             @foreach ($stats as $stat)
-                <div class="flex items-center justify-center gap-4 px-6 py-6">
-                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $stat['icon'] }}"/></svg>
+                <div class="flex flex-col items-center justify-center gap-2 text-center md:flex-row md:justify-start md:gap-4 md:text-left">
+                    <div class="rounded-full bg-[#F57C20] p-2 text-white shadow-md md:p-4">
+                        <svg class="h-5 w-5 md:h-8 md:w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $stat['svg'] !!}</svg>
                     </div>
                     <div>
-                        <div class="text-2xl font-bold text-heading">
+                        <h4 class="text-sm font-bold text-[#14295F] md:text-2xl">
                             <span class="counter" data-count="{{ $stat['value'] }}">0</span>{{ $stat['suffix'] }}
-                        </div>
-                        <div class="text-sm text-body">{{ $stat['label'] }}</div>
+                        </h4>
+                        <p class="text-xs font-medium text-orange-400 md:text-base">{{ $stat['label'] }}</p>
                     </div>
                 </div>
             @endforeach
