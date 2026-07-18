@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationEntryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Auth\LoginController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('stats', StatController::class)->except('show')->names('admin.stats');
     Route::resource('services', ServiceController::class)->except('show')->names('admin.services');
+    Route::resource('skills', SkillController::class)->except('show')->names('admin.skills');
     Route::resource('education', EducationEntryController::class)->except('show')->names('admin.education');
     Route::resource('social-links', SocialLinkController::class)->except('show')->names('admin.social-links');
     Route::resource('about-images', AboutImageController::class)->except('show')->names('admin.about-images');
