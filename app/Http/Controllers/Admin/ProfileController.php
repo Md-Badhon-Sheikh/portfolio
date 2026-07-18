@@ -22,7 +22,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's name, email, and avatar.
+     * Update the user's profile: account info, and the content shown in the
+     * public hero section (designation, bio, avatar, CV, contact link).
      */
     public function update(Request $request): RedirectResponse
     {
@@ -31,7 +32,11 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:150', Rule::unique('users', 'email')->ignore($user->id)],
+            'designation' => ['nullable', 'string', 'max:150'],
+            'bio' => ['nullable', 'string', 'max:1000'],
+            'contact_link' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'image', 'max:2048'],
+            'cv' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -39,6 +44,13 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->avatar);
             }
             $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        if ($request->hasFile('cv')) {
+            if ($user->cv) {
+                Storage::disk('public')->delete($user->cv);
+            }
+            $validated['cv'] = $request->file('cv')->store('cv', 'public');
         }
 
         $user->update($validated);

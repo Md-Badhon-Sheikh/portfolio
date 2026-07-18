@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'avatar'])]
+#[Fillable(['name', 'email', 'password', 'avatar', 'designation', 'bio', 'cv', 'contact_link'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -44,5 +44,13 @@ class User extends Authenticatable
     public function initial(): string
     {
         return mb_strtoupper(mb_substr($this->name, 0, 1));
+    }
+
+    /**
+     * Public URL for the user's uploaded CV, or null if none uploaded.
+     */
+    public function cvUrl(): ?string
+    {
+        return $this->cv ? asset('storage/'.$this->cv) : null;
     }
 }

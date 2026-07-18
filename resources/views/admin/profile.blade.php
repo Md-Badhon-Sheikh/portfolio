@@ -47,6 +47,49 @@
                     @error('email') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
                 </div>
 
+                <div class="border-t border-heading/10 pt-5">
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-wide text-body">Public Hero Section</p>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label for="designation" class="mb-1.5 block text-sm font-medium text-heading">Designation</label>
+                            <input type="text" id="designation" name="designation" value="{{ old('designation', $user->designation) }}"
+                                placeholder="Web Developer and Designer"
+                                class="w-full rounded-xl border border-heading/10 bg-page px-4 py-3 text-sm text-heading outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 @error('designation') border-red-400 @enderror">
+                            @error('designation') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="bio" class="mb-1.5 block text-sm font-medium text-heading">Hero Description</label>
+                            <textarea id="bio" name="bio" rows="3"
+                                placeholder="A short intro shown under your name on the homepage"
+                                class="w-full rounded-xl border border-heading/10 bg-page px-4 py-3 text-sm text-heading outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 @error('bio') border-red-400 @enderror">{{ old('bio', $user->bio) }}</textarea>
+                            @error('bio') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="contact_link" class="mb-1.5 block text-sm font-medium text-heading">Contact Button Link</label>
+                            <input type="text" id="contact_link" name="contact_link" value="{{ old('contact_link', $user->contact_link) }}"
+                                placeholder="https://wa.me/8801xxxxxxxxx or mailto:you@example.com"
+                                class="w-full rounded-xl border border-heading/10 bg-page px-4 py-3 text-sm text-heading outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 @error('contact_link') border-red-400 @enderror">
+                            <p class="mt-1.5 text-xs text-body">Leave blank to scroll to the on-page Contact section instead.</p>
+                            @error('contact_link') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="cv" class="mb-1.5 block text-sm font-medium text-heading">CV / Resume (PDF)</label>
+                            @if ($user->cvUrl())
+                                <a href="{{ $user->cvUrl() }}" target="_blank" rel="noopener" class="mb-2 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline">
+                                    View current CV
+                                </a>
+                            @endif
+                            <input type="file" id="cv" name="cv" accept="application/pdf"
+                                class="w-full text-sm text-body file:mr-3 file:rounded-lg file:border-0 file:bg-primary/10 file:px-3 file:py-2 file:text-sm file:font-medium file:text-primary hover:file:bg-primary/20">
+                            @error('cv') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn-primary">Save Changes</button>
             </form>
         </div>

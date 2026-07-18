@@ -17,6 +17,7 @@
         $adminNav = [
             ['label' => 'Dashboard', 'route' => 'dashboard', 'icon' => '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>'],
             ['label' => 'Profile', 'route' => 'profile.edit', 'icon' => '<circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/>'],
+            ['label' => 'Hero Stats', 'route' => 'admin.stats.index', 'icon' => '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>'],
         ];
     @endphp
 </head>
