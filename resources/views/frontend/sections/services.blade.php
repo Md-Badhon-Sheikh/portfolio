@@ -2,7 +2,7 @@
      Services Section
      Section title + auto-scrolling marquee of service cards
      ============================================================ --}}
-<section id="services" class="py-16 sm:py-24 overflow-hidden bg-white text-slate-900">
+<section id="services" class="py-16 sm:py-24 -mt-12 overflow-hidden bg-white text-slate-900">
     <style>
         @keyframes serviceScroll {
             0% { transform: translateX(0); }
@@ -18,6 +18,28 @@
             animation-play-state: paused;
         }
     </style>
+
+
+      {{-- Floating stats card — pill-shaped, overlapping the hero bottom edge --}}
+    <div class="relative z-10 mx-auto  max-w-7xl px-5 md:-mt-20 lg:px-8 mb-20">
+        <div class="reveal grid grid-cols-3 gap-2 rounded-2xl border border-slate-100 bg-white px-2 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:gap-10 md:rounded-full md:px-12" style="margin-top: -96px;">
+            @forelse ($stats as $stat)
+                <div class="flex flex-col items-center justify-center gap-2 text-center md:flex-row md:justify-start md:gap-4 md:text-left">
+                    <div class="rounded-full bg-[#F57C20] p-2 text-white shadow-md md:p-4">
+                        <svg class="h-5 w-5 md:h-8 md:w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $stat->svgPaths() !!}</svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-[#14295F] md:text-2xl">
+                            <span class="counter" data-count="{{ $stat->value }}">0</span>{{ $stat->suffix }}
+                        </h4>
+                        <p class="text-xs font-medium text-orange-400 md:text-base">{{ $stat->label }}</p>
+                    </div>
+                </div>
+            @empty
+                <p class="col-span-3 py-2 text-center text-sm text-body">No stats added yet.</p>
+            @endforelse
+        </div>
+    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
