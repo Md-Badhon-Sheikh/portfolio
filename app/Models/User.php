@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'avatar', 'designation', 'bio', 'cv', 'contact_link'])]
+#[Fillable(['name', 'email', 'password', 'avatar', 'designation', 'bio', 'cv', 'contact_link', 'about_bio', 'about_highlights'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -52,5 +52,22 @@ class User extends Authenticatable
     public function cvUrl(): ?string
     {
         return $this->cv ? asset('storage/'.$this->cv) : null;
+    }
+
+    /**
+     * The About → Bio tab's checklist items, one per line of `about_highlights`.
+     *
+     * @return array<int, string>
+     */
+    public function highlights(): array
+    {
+        if (! $this->about_highlights) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            'trim',
+            preg_split('/\r\n|\r|\n/', $this->about_highlights)
+        )));
     }
 }

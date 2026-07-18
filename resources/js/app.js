@@ -179,6 +179,16 @@ $(function () {
     });
 
     /* ---------------------------------------------------------
+     * Header "About Us" dropdown: clicking a child (Education /
+     * Bio / Contact) activates the matching About tab. The
+     * generic smooth-scroll handler below still scrolls to #about.
+     * ------------------------------------------------------- */
+    $('[data-about-tab]').on('click', function () {
+        const tab = $(this).data('about-tab');
+        $(`.about-tab-btn[data-tab="${tab}"]`).trigger('click');
+    });
+
+    /* ---------------------------------------------------------
      * About: image slider
      * ------------------------------------------------------- */
     const $slides = $('.about-slide');

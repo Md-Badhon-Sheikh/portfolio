@@ -37,6 +37,9 @@ class ProfileController extends Controller
             'contact_link' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'image', 'max:2048'],
             'cv' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
+            // CKEditor output — larger limit since it includes HTML markup, not just visible text.
+            'about_bio' => ['nullable', 'string', 'max:20000'],
+            'about_highlights' => ['nullable', 'string', 'max:1000'],
         ]);
 
         if ($request->hasFile('avatar')) {

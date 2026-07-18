@@ -1,12 +1,18 @@
 {{-- ============================================================
      Header / Sticky Navbar
      Logo (left) — Menu (center) — Social icons (right)
+     "About Us" is a parent item with a dropdown of Education / Bio / Contact,
+     each of which scrolls to #about and activates the matching tab (app.js).
      ============================================================ --}}
 @php
     $navLinks = [
         ['label' => 'Home', 'href' => '#home'],
         ['label' => 'Services', 'href' => '#services'],
-        ['label' => 'About', 'href' => '#about'],
+        ['label' => 'About Us', 'href' => '#about', 'children' => [
+            ['label' => 'Education', 'tab' => 'education'],
+            ['label' => 'Bio', 'tab' => 'bio'],
+            ['label' => 'Contact', 'tab' => 'contact'],
+        ]],
         ['label' => 'Skills', 'href' => '#skills'],
         ['label' => 'Portfolio', 'href' => '#portfolio'],
         ['label' => 'Gallery', 'href' => '#gallery'],
@@ -27,13 +33,33 @@
             {{-- Desktop Menu (center) --}}
             <nav class="hidden lg:flex items-center gap-5 xl:gap-7 font-medium text-[#14295F] text-base xl:text-lg" aria-label="Primary">
                 @foreach ($navLinks as $link)
-                    <a
-                        href="{{ $link['href'] }}"
-                        class="nav-link text-heading/80 transition-colors duration-200 hover:text-orange-500"
-                        data-nav-target="{{ ltrim($link['href'], '#') }}"
-                    >
-                        {{ $link['label'] }}
-                    </a>
+                    @if (isset($link['children']))
+                        <div class="relative group">
+                            <a
+                                href="{{ $link['href'] }}"
+                                class="nav-link inline-flex items-center gap-1 text-heading/80 transition-colors duration-200 hover:text-orange-500"
+                                data-nav-target="{{ ltrim($link['href'], '#') }}"
+                            >
+                                {{ $link['label'] }}
+                                <svg class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </a>
+                            <div class="invisible absolute left-0 top-full z-20 w-48 rounded-xl bg-white p-2 opacity-0 shadow-[0_10px_40px_-15px_rgba(30,42,94,0.25)] transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                                @foreach ($link['children'] as $child)
+                                    <a href="{{ $link['href'] }}" data-about-tab="{{ $child['tab'] }}" class="about-dropdown-link block rounded-lg px-4 py-2.5 text-sm font-medium text-heading/80 transition hover:bg-orange-50 hover:text-orange-500">
+                                        {{ $child['label'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <a
+                            href="{{ $link['href'] }}"
+                            class="nav-link text-heading/80 transition-colors duration-200 hover:text-orange-500"
+                            data-nav-target="{{ ltrim($link['href'], '#') }}"
+                        >
+                            {{ $link['label'] }}
+                        </a>
+                    @endif
                 @endforeach
             </nav>
 
@@ -63,9 +89,22 @@
         {{-- Mobile Menu Panel --}}
         <nav id="mobile-menu" class="lg:hidden hidden mb-4 rounded-2xl bg-white p-4 shadow-[0_10px_40px_-15px_rgba(30,42,94,0.25)]" aria-label="Mobile">
             @foreach ($navLinks as $link)
-                <a href="{{ $link['href'] }}" class="mobile-nav-link block rounded-xl px-4 py-3 text-sm font-medium text-heading/80 transition hover:bg-orange-50 hover:text-orange-500" data-nav-target="{{ ltrim($link['href'], '#') }}">
-                    {{ $link['label'] }}
-                </a>
+                @if (isset($link['children']))
+                    <a href="{{ $link['href'] }}" class="mobile-nav-link block rounded-xl px-4 py-3 text-sm font-medium text-heading/80 transition hover:bg-orange-50 hover:text-orange-500" data-nav-target="{{ ltrim($link['href'], '#') }}">
+                        {{ $link['label'] }}
+                    </a>
+                    <div class="ml-3 border-l border-slate-200 pl-2">
+                        @foreach ($link['children'] as $child)
+                            <a href="{{ $link['href'] }}" data-about-tab="{{ $child['tab'] }}" class="mobile-nav-link about-dropdown-link block rounded-xl px-4 py-2 text-sm text-heading/60 transition hover:bg-orange-50 hover:text-orange-500">
+                                {{ $child['label'] }}
+                            </a>
+                        @endforeach
+                    </div>
+                @else
+                    <a href="{{ $link['href'] }}" class="mobile-nav-link block rounded-xl px-4 py-3 text-sm font-medium text-heading/80 transition hover:bg-orange-50 hover:text-orange-500" data-nav-target="{{ ltrim($link['href'], '#') }}">
+                        {{ $link['label'] }}
+                    </a>
+                @endif
             @endforeach
             <a href="https://wa.me/8801642874989" target="_blank" rel="noopener noreferrer" class="btn-primary mt-2 w-full">Contact</a>
         </nav>

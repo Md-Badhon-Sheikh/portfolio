@@ -90,6 +90,33 @@
                     </div>
                 </div>
 
+                <div class="border-t border-heading/10 pt-5">
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-wide text-body">About Section</p>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label for="about_bio" class="mb-1.5 block text-sm font-medium text-heading">Bio</label>
+                            <textarea id="about_bio" name="about_bio" rows="8"
+                                placeholder="The longer bio shown in the About &rarr; Bio tab">{{ old('about_bio', $user->about_bio) }}</textarea>
+                            @error('about_bio') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="about_highlights" class="mb-1.5 block text-sm font-medium text-heading">Bio Highlights</label>
+                            <textarea id="about_highlights" name="about_highlights" rows="4"
+                                placeholder="Clean Code&#10;Responsive Design&#10;On-time Delivery&#10;Clear Communication"
+                                class="w-full rounded-xl border border-heading/10 bg-page px-4 py-3 text-sm text-heading outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 @error('about_highlights') border-red-400 @enderror">{{ old('about_highlights', $user->about_highlights) }}</textarea>
+                            <p class="mt-1.5 text-xs text-body">One short item per line — shown as a checklist under the bio.</p>
+                            @error('about_highlights') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <p class="text-xs text-body">
+                            Bio slider images are managed on the <a href="{{ route('admin.about-images.index') }}" class="font-medium text-primary hover:underline">Bio Slider Images</a> page,
+                            and the Contact tab's cards on the <a href="{{ route('admin.contact-infos.index') }}" class="font-medium text-primary hover:underline">Contact Info</a> page.
+                        </p>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn-primary">Save Changes</button>
             </form>
         </div>
@@ -127,3 +154,14 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#about_bio'), {
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'blockQuote', 'undo', 'redo'],
+            })
+            .catch((error) => console.error(error));
+    </script>
+@endpush
