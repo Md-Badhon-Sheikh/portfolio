@@ -19,9 +19,15 @@
             ['label' => 'Profile', 'route' => 'profile.edit', 'icon' => '<circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/>'],
             ['label' => 'Hero Stats', 'route' => 'admin.stats.index', 'icon' => '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>'],
             ['label' => 'Services', 'route' => 'admin.services.index', 'icon' => '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>'],
-            ['label' => 'Education', 'route' => 'admin.education.index', 'icon' => '<path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>'],
-            ['label' => 'Bio Slider Images', 'route' => 'admin.about-images.index', 'icon' => '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'],
-            ['label' => 'Contact Info', 'route' => 'admin.contact-infos.index', 'icon' => '<path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.98.804l.716 3.578a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.06-.54l3.578.716a1 1 0 01.804.98V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>'],
+            [
+                'label' => 'About Us',
+                'icon' => '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+                'children' => [
+                    ['label' => 'Education', 'route' => 'admin.education.index', 'icon' => '<path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>'],
+                    ['label' => 'Bio Slider Images', 'route' => 'admin.about-images.index', 'icon' => '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'],
+                    ['label' => 'Contact Info', 'route' => 'admin.contact-infos.index', 'icon' => '<path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.98.804l.716 3.578a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.06-.54l3.578.716a1 1 0 01.804.98V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>'],
+                ],
+            ],
             ['label' => 'Social Links', 'route' => 'admin.social-links.index', 'icon' => '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/>'],
         ];
     @endphp
@@ -42,11 +48,38 @@
 
             <nav class="space-y-1 px-4 py-6">
                 @foreach ($adminNav as $item)
-                    <a href="{{ route($item['route']) }}"
-                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition {{ request()->routeIs($item['route']) ? 'bg-primary/10 text-primary' : 'text-heading/70 hover:bg-orange-50 hover:text-primary' }}">
-                        <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $item['icon'] !!}</svg>
-                        {{ $item['label'] }}
-                    </a>
+                    @if (isset($item['children']))
+                        @php
+                            $groupActive = collect($item['children'])->contains(
+                                fn ($child) => request()->routeIs(\Illuminate\Support\Str::beforeLast($child['route'], '.').'.*')
+                            );
+                        @endphp
+                        <div>
+                            <button type="button"
+                                class="admin-nav-group-toggle flex w-full items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium transition {{ $groupActive ? 'bg-primary/10 text-primary' : 'text-heading/70 hover:bg-orange-50 hover:text-primary' }}">
+                                <span class="flex items-center gap-3">
+                                    <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $item['icon'] !!}</svg>
+                                    {{ $item['label'] }}
+                                </span>
+                                <svg class="admin-nav-group-chevron h-4 w-4 shrink-0 transition-transform duration-200 {{ $groupActive ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="admin-nav-group-panel {{ $groupActive ? '' : 'hidden' }} mt-1 space-y-1 pl-4">
+                                @foreach ($item['children'] as $child)
+                                    <a href="{{ route($child['route']) }}"
+                                        class="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition {{ request()->routeIs($child['route']) ? 'bg-primary/10 text-primary' : 'text-heading/60 hover:bg-orange-50 hover:text-primary' }}">
+                                        <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $child['icon'] !!}</svg>
+                                        {{ $child['label'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route($item['route']) }}"
+                            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition {{ request()->routeIs($item['route']) ? 'bg-primary/10 text-primary' : 'text-heading/70 hover:bg-orange-50 hover:text-primary' }}">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $item['icon'] !!}</svg>
+                            {{ $item['label'] }}
+                        </a>
+                    @endif
                 @endforeach
 
                 <div class="my-4 border-t border-heading/10"></div>
@@ -154,6 +187,13 @@
                 if (!userMenu.classList.contains('hidden') && !userMenu.contains(e.target)) {
                     userMenu.classList.add('hidden');
                 }
+            });
+
+            document.querySelectorAll('.admin-nav-group-toggle').forEach((toggle) => {
+                toggle.addEventListener('click', () => {
+                    toggle.nextElementSibling.classList.toggle('hidden');
+                    toggle.querySelector('.admin-nav-group-chevron').classList.toggle('rotate-180');
+                });
             });
         })();
     </script>
