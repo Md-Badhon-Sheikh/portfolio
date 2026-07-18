@@ -11,35 +11,22 @@
             <h2 class="section-title">My Amazing Works</h2>
         </div>
 
-        <div class="mt-14 flex flex-wrap gap-4 after:content-[''] after:grow-[99999] after:min-w-[200px]">
-            @php
-                $gallery = [
-                    ['title' => 'Modern business website', 'src' => 'uiux1.webp', 'w' => 'w-96'],
-                    ['title' => 'Food service website', 'src' => 'uiux2.webp', 'w' => 'w-64'],
-                    ['title' => 'Mobile app screens', 'src' => 'uiux3.webp', 'w' => 'w-72'],
-                    ['title' => 'QR code system UI', 'src' => 'uiux4.webp', 'w' => 'w-80'],
-                    ['title' => 'Portfolio landing page', 'src' => 'uiux5.webp', 'w' => 'w-[500px]'],
-                    ['title' => 'Shoe product page', 'src' => 'uiux6.webp', 'w' => 'w-72'],
-                    ['title' => 'Dark mode mobile app', 'src' => 'uiux7.webp', 'w' => 'w-60'],
-                    ['title' => 'Business coaching website', 'src' => 'uiux8.webp', 'w' => 'w-96'],
-                    ['title' => 'Sneaker store hero', 'src' => 'uiux9.webp', 'w' => 'w-80'],
-                    ['title' => 'Electronics e-commerce', 'src' => 'uiux10.webp', 'w' => 'w-64'],
-                    ['title' => 'Settings UI profile', 'src' => 'uiux11.webp', 'w' => 'w-72'],
-                    ['title' => 'Analytics dashboard', 'src' => 'uiux12.webp', 'w' => 'w-96'],
-                    ['title' => 'Analytics dashboard', 'src' => 'uiux13.webp', 'w' => 'w-96'],
-                ];
-            @endphp
-            @foreach ($gallery as $item)
-                <button type="button"
-                    class="gallery-item group relative flex-auto h-40 md:h-56 {{ $item['w'] }} overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
-                    data-title="{{ $item['title'] }}"
-                    data-src="{{ asset('images/gallery/' . $item['src']) }}">
-                    <img src="{{ asset('images/gallery/' . $item['src']) }}" alt="{{ $item['title'] }}" loading="lazy"
-                        class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
-                    <span class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
-                </button>
-            @endforeach
-        </div>
+        @if ($galleryImages->isNotEmpty())
+            <div class="mt-14 flex flex-wrap gap-4 after:content-[''] after:grow-[99999] after:min-w-[200px]">
+                @foreach ($galleryImages as $item)
+                    <button type="button"
+                        class="gallery-item group relative flex-auto h-40 md:h-56 {{ $item->widthClass() }} overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+                        data-title="{{ $item->title }}"
+                        data-src="{{ $item->imageUrl() }}">
+                        <img src="{{ $item->imageUrl() }}" alt="{{ $item->title }}" loading="lazy"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
+                        <span class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
+                    </button>
+                @endforeach
+            </div>
+        @else
+            <p class="mt-14 text-center text-sm text-body">No gallery images added yet.</p>
+        @endif
     </div>
 </section>
 

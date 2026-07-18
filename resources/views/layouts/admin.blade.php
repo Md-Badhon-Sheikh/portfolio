@@ -21,6 +21,7 @@
             ['label' => 'Services', 'route' => 'admin.services.index', 'icon' => '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>'],
             ['label' => 'Skills', 'route' => 'admin.skills.index', 'icon' => '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/>'],
             ['label' => 'Portfolio', 'route' => 'admin.projects.index', 'icon' => '<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'],
+            ['label' => 'Gallery', 'route' => 'admin.gallery-images.index', 'icon' => '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'],
             [
                 'label' => 'About Us',
                 'icon' => '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',

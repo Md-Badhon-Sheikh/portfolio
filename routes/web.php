@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutImageController;
 use App\Http\Controllers\Admin\ContactInfoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationEntryController;
+use App\Http\Controllers\Admin\GalleryImageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -46,5 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('education', EducationEntryController::class)->except('show')->names('admin.education');
     Route::resource('social-links', SocialLinkController::class)->except('show')->names('admin.social-links');
     Route::resource('about-images', AboutImageController::class)->except('show')->names('admin.about-images');
+    Route::resource('gallery-images', GalleryImageController::class)->except('show')->names('admin.gallery-images');
     Route::resource('contact-infos', ContactInfoController::class)->except('show')->names('admin.contact-infos');
 });
