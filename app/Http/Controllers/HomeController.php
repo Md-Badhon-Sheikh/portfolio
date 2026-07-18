@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AboutImage;
 use App\Models\ContactInfo;
 use App\Models\EducationEntry;
+use App\Models\Experience;
 use App\Models\GalleryImage;
 use App\Models\Project;
 use App\Models\Service;
@@ -31,6 +32,7 @@ class HomeController extends Controller
         $aboutImages = AboutImage::orderBy('sort_order')->orderBy('id')->get();
         $contactInfos = ContactInfo::orderBy('sort_order')->orderBy('id')->get();
         $galleryImages = GalleryImage::orderBy('sort_order')->orderBy('id')->get();
+        $experiences = Experience::orderBy('sort_order')->orderBy('id')->get();
 
         $projects = Project::orderBy('sort_order')->orderBy('id')->get();
         // Portfolio filter buttons are derived from whatever tags projects actually have,
@@ -42,7 +44,7 @@ class HomeController extends Controller
 
         return view('frontend.home', compact(
             'owner', 'stats', 'services', 'skills', 'educationEntries', 'socialLinks',
-            'aboutImages', 'contactInfos', 'projects', 'portfolioFilters', 'galleryImages'
+            'aboutImages', 'contactInfos', 'projects', 'portfolioFilters', 'galleryImages', 'experiences'
         ));
     }
 }

@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AboutImageController;
 use App\Http\Controllers\Admin\ContactInfoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationEntryController;
+use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\GalleryImageController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy'])->names('admin.messages');
+
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
@@ -44,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('services', ServiceController::class)->except('show')->names('admin.services');
     Route::resource('skills', SkillController::class)->except('show')->names('admin.skills');
     Route::resource('projects', ProjectController::class)->except('show')->names('admin.projects');
+    Route::resource('experiences', ExperienceController::class)->except('show')->names('admin.experiences');
     Route::resource('education', EducationEntryController::class)->except('show')->names('admin.education');
     Route::resource('social-links', SocialLinkController::class)->except('show')->names('admin.social-links');
     Route::resource('about-images', AboutImageController::class)->except('show')->names('admin.about-images');

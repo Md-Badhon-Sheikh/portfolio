@@ -16,12 +16,14 @@
     @php
         $adminNav = [
             ['label' => 'Dashboard', 'route' => 'dashboard', 'icon' => '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>'],
+            ['label' => 'Messages', 'route' => 'admin.messages.index', 'icon' => '<path d="M4 4h16v12H7l-3 3V4z"/>', 'badge' => \App\Models\ContactMessage::whereNull('read_at')->count() ?: null],
             ['label' => 'Profile', 'route' => 'profile.edit', 'icon' => '<circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/>'],
             ['label' => 'Hero Stats', 'route' => 'admin.stats.index', 'icon' => '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>'],
             ['label' => 'Services', 'route' => 'admin.services.index', 'icon' => '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>'],
             ['label' => 'Skills', 'route' => 'admin.skills.index', 'icon' => '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/>'],
             ['label' => 'Portfolio', 'route' => 'admin.projects.index', 'icon' => '<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'],
             ['label' => 'Gallery', 'route' => 'admin.gallery-images.index', 'icon' => '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'],
+            ['label' => 'Experience', 'route' => 'admin.experiences.index', 'icon' => '<path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/>'],
             [
                 'label' => 'About Us',
                 'icon' => '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
@@ -78,9 +80,14 @@
                         </div>
                     @else
                         <a href="{{ route($item['route']) }}"
-                            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition {{ request()->routeIs($item['route']) ? 'bg-primary/10 text-primary' : 'text-heading/70 hover:bg-orange-50 hover:text-primary' }}">
-                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $item['icon'] !!}</svg>
-                            {{ $item['label'] }}
+                            class="flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium transition {{ request()->routeIs($item['route']) ? 'bg-primary/10 text-primary' : 'text-heading/70 hover:bg-orange-50 hover:text-primary' }}">
+                            <span class="flex items-center gap-3">
+                                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">{!! $item['icon'] !!}</svg>
+                                {{ $item['label'] }}
+                            </span>
+                            @if (!empty($item['badge']))
+                                <span class="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-xs font-bold text-white">{{ $item['badge'] }}</span>
+                            @endif
                         </a>
                     @endif
                 @endforeach

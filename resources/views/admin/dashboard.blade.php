@@ -49,7 +49,10 @@
 
     {{-- Recent messages --}}
     <div class="mt-8 card-surface p-6">
-        <h3 class="mb-4 text-lg font-bold text-heading">Recent Contact Messages</h3>
+        <div class="mb-4 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-heading">Recent Contact Messages</h3>
+            <a href="{{ route('admin.messages.index') }}" class="text-sm font-medium text-primary hover:underline">View all</a>
+        </div>
 
         @if ($recentMessages->isEmpty())
             <p class="text-sm text-body">No messages yet.</p>
@@ -66,8 +69,8 @@
                     </thead>
                     <tbody class="divide-y divide-heading/5">
                         @foreach ($recentMessages as $message)
-                            <tr>
-                                <td class="py-3 pr-4 font-medium text-heading">{{ $message->name }}</td>
+                            <tr class="cursor-pointer hover:bg-page" onclick="window.location='{{ route('admin.messages.show', $message) }}'">
+                                <td class="py-3 pr-4 {{ $message->isUnread() ? 'font-bold' : 'font-medium' }} text-heading">{{ $message->name }}</td>
                                 <td class="py-3 pr-4 text-body">{{ $message->email }}</td>
                                 <td class="py-3 pr-4 text-body">{{ $message->subject }}</td>
                                 <td class="py-3 text-body">{{ $message->created_at->diffForHumans() }}</td>
