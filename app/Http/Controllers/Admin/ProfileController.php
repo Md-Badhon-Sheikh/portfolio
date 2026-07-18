@@ -36,6 +36,7 @@ class ProfileController extends Controller
             'bio' => ['nullable', 'string', 'max:1000'],
             'contact_link' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'image', 'max:2048'],
+            'logo' => ['nullable', 'image', 'max:2048'],
             'cv' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
             // CKEditor output — larger limit since it includes HTML markup, not just visible text.
             'about_bio' => ['nullable', 'string', 'max:20000'],
@@ -47,6 +48,13 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->avatar);
             }
             $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        if ($request->hasFile('logo')) {
+            if ($user->logo) {
+                Storage::disk('public')->delete($user->logo);
+            }
+            $validated['logo'] = $request->file('logo')->store('logo', 'public');
         }
 
         if ($request->hasFile('cv')) {

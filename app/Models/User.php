@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'avatar', 'designation', 'bio', 'cv', 'contact_link', 'about_bio', 'about_highlights'])]
+#[Fillable(['name', 'email', 'password', 'avatar', 'logo', 'designation', 'bio', 'cv', 'contact_link', 'about_bio', 'about_highlights'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -44,6 +44,15 @@ class User extends Authenticatable
     public function initial(): string
     {
         return mb_strtoupper(mb_substr($this->name, 0, 1));
+    }
+
+    /**
+     * Public URL for the site logo, or null if none uploaded (the header
+     * falls back to a text brand mark in that case).
+     */
+    public function logoUrl(): ?string
+    {
+        return $this->logo ? asset('storage/'.$this->logo) : null;
     }
 
     /**

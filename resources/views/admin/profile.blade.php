@@ -48,6 +48,21 @@
                 </div>
 
                 <div class="border-t border-heading/10 pt-5">
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-wide text-body">Site Branding</p>
+
+                    <div>
+                        @if ($user->logoUrl())
+                            <img src="{{ $user->logoUrl() }}" alt="Logo" class="mb-2 h-10 w-auto">
+                        @endif
+                        <label for="logo" class="mb-1.5 block text-sm font-medium text-heading">Header Logo</label>
+                        <input type="file" id="logo" name="logo" accept="image/*"
+                            class="w-full text-sm text-body file:mr-3 file:rounded-lg file:border-0 file:bg-primary/10 file:px-3 file:py-2 file:text-sm file:font-medium file:text-primary hover:file:bg-primary/20">
+                        <p class="mt-1.5 text-xs text-body">Shown top-left in the site header. Leave blank to show your name as a text logo instead.</p>
+                        @error('logo') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+
+                <div class="border-t border-heading/10 pt-5">
                     <p class="mb-4 text-xs font-semibold uppercase tracking-wide text-body">Public Hero Section</p>
 
                     <div class="space-y-5">
