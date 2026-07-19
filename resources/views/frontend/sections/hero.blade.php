@@ -6,7 +6,7 @@
      both supplied by HomeController — editable from /profile and /stats.
      ============================================================ --}}
 @php
-    $heroName = $owner->name ?? 'Mohammad Badhon';
+    $heroName = $owner->name ?? 'Joy Datta';
     $heroDesignation = $owner->designation ?? 'Web Developer and Designer';
     $heroBio = $owner->bio ?? 'React, Django, and WordPress specialist with strong UI/UX design skills—creating fast, functional, and visually compelling digital experiences.';
     $heroCv = $owner?->cvUrl() ?? asset('mycv.pdf');
@@ -14,7 +14,7 @@
     $heroPhoto = $owner?->avatarUrl() ?? asset('images/hero/profile.webp');
     $isExternalContact = str_starts_with($heroContact, 'http') || str_starts_with($heroContact, 'mailto:');
 @endphp
-<section id="home" class="relative pb-12  bg-[#FDF8F7] pt-12 pb-0 lg:pt-16">
+<section id="home" class="relative pb-12 bg-[#FDF8F7] pt-12 pb-0 lg:pt-16">
 
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
@@ -28,7 +28,7 @@
                     {{ $heroBio }}
                 </p>
 
-                <div class="flex flex-wrap gap-6 justify-center lg:justify-start pt-4">
+                <div class="flex flex-wrap gap-6 justify-center lg:justify-start pt-4 mb-20">
                     <a href="{{ $heroCv }}" target="_blank" rel="noopener noreferrer" class="bg-[#F57C20] text-white px-8 py-3 shadow-2xl rounded-lg font-medium hover:bg-orange-600 transition active:scale-95 cursor-pointer">
                         Download CV
                     </a>

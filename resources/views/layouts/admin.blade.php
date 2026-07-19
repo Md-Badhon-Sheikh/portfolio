@@ -45,9 +45,13 @@
 
         {{-- Sidebar --}}
         <aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r border-heading/10 bg-white transition-transform duration-300 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0">
-            <div class="flex h-16 items-center gap-2 border-b border-heading/10 px-6">
+            <div class="flex h-16 items-center justify-center gap-2 border-b border-heading/10 px-6">
                 <a href="{{ route('dashboard') }}" class="text-lg font-bold text-heading">
-                    Mohammad Badhon<span class="text-primary">.</span>
+                    @if (auth()->user()->logoUrl())
+                        <img src="{{ auth()->user()->logoUrl() }}" alt="{{ auth()->user()->name }}" class="h-8 w-auto">
+                    @else
+                        {{ auth()->user()->name }}<span class="text-primary">.</span>
+                    @endif
                 </a>
             </div>
 
@@ -164,7 +168,7 @@
             </main>
 
             <footer class="border-t border-heading/10 px-5 py-5 text-center text-xs text-body lg:px-8">
-                &copy; {{ date('Y') }} Mohammad Badhon. All rights reserved.
+                &copy; {{ date('Y') }} Joy Datta. All rights reserved.
             </footer>
         </div>
     </div>

@@ -5,7 +5,7 @@
      each of which scrolls to #about and activates the matching tab (app.js).
      ============================================================ --}}
 @php
-    $headerName = $owner->name ?? 'Mohammad Badhon';
+    $headerName = $owner->name ?? 'Joy Datta';
     $headerContactLink = $owner->contact_link ?? '#contact';
     $isExternalHeaderContact = str_starts_with($headerContactLink, 'http') || str_starts_with($headerContactLink, 'mailto:');
 

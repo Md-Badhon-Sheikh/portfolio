@@ -2,7 +2,7 @@
      Footer Section
      Logo, quick links, socials, copyright + Back-to-top button (app.js)
      ============================================================ --}}
-@php $footerName = $owner->name ?? 'Mohammad Badhon'; @endphp
+@php $footerName = $owner->name ?? 'Joy Datta'; @endphp
 <footer class="bg-heading py-14 text-white/70">
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="flex flex-col items-center justify-between gap-8 border-b border-white/10 pb-10 sm:flex-row">

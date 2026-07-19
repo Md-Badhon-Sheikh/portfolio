@@ -15,9 +15,15 @@
 </head>
 <body class="min-h-screen bg-[#FDF8F7] text-body antialiased">
 
+    @php $guestOwner = \App\Models\User::first(); @endphp
+
     <div class="flex min-h-screen flex-col items-center justify-center px-5 py-12">
-        <a href="{{ route('home') }}" class="mb-8 text-2xl font-bold text-[#14295F]">
-            Mohammad Badhon<span class="text-primary">.</span>
+        <a href="{{ route('home') }}" class="mb-8">
+            @if ($guestOwner?->logoUrl())
+                <img src="{{ $guestOwner->logoUrl() }}" alt="{{ $guestOwner->name }}" class="h-10 w-auto md:h-12">
+            @else
+                <span class="text-2xl font-bold text-[#14295F]">{{ $guestOwner->name ?? 'Joy Datta' }}</span>
+            @endif
         </a>
 
         <div class="w-full max-w-md card-surface p-8 sm:p-10">

@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title', 'Mohammad Badhon | Portfolio')</title>
-    <meta name="description" content="@yield('description', 'Portfolio of Mohammad Badhon — Web Developer and Designer specializing in Laravel, PHP, and modern front-end development.')">
+    <title>@yield('title', 'Joy Datta | Portfolio')</title>
+    <meta name="description" content="@yield('description', 'Portfolio of Joy Datta — Web Developer and Designer specializing in Laravel, PHP, and modern front-end development.')">
 
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 

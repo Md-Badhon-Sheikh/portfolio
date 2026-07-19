@@ -4,8 +4,8 @@
      ============================================================ --}}
 @extends('layouts.app')
 
-@section('title', 'Mohammad Badhon | Web Developer & Designer')
-@section('description', 'Portfolio of Mohammad Badhon — Web Developer and Designer specializing in Laravel, PHP, and modern front-end development.')
+@section('title', 'Joy Datta | Web Developer & Designer')
+@section('description', 'Portfolio of Joy Datta — Web Developer and Designer specializing in Laravel, PHP, and modern front-end development.')
 
 @section('content')
     @include('frontend.sections.hero')
