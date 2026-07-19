@@ -2,7 +2,7 @@
      Services Section
      Section title + auto-scrolling marquee of service cards
      ============================================================ --}}
-<section id="services" class="py-16 sm:py-24 -mt-12 overflow-hidden bg-white text-slate-900">
+<section id="services" class="py-16 sm:py-24 -mt-12  bg-white text-slate-900">
     <style>
         @keyframes serviceScroll {
             0% { transform: translateX(0); }
