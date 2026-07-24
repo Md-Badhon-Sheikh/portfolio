@@ -168,7 +168,7 @@
             </main>
 
             <footer class="border-t border-heading/10 px-5 py-5 text-center text-xs text-body lg:px-8">
-                &copy; {{ date('Y') }} Joy Datta. All rights reserved.
+                &copy; {{ date('Y') }} Badhon Sheikh. All rights reserved.
             </footer>
         </div>
     </div>

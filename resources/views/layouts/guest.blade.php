@@ -22,7 +22,7 @@
             @if ($guestOwner?->logoUrl())
                 <img src="{{ $guestOwner->logoUrl() }}" alt="{{ $guestOwner->name }}" class="h-10 w-auto md:h-12">
             @else
-                <span class="text-2xl font-bold text-[#14295F]">{{ $guestOwner->name ?? 'Joy Datta' }}</span>
+                <span class="text-2xl font-bold text-[#14295F]">{{ $guestOwner->name ?? 'Badhon Sheikh' }}</span>
             @endif
         </a>
 

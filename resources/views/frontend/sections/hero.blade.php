@@ -6,8 +6,8 @@
      both supplied by HomeController — editable from /profile and /stats.
      ============================================================ --}}
 @php
-    $heroName = $owner->name ?? 'Joy Datta';
-    $heroDesignation = $owner->designation ?? 'Web Developer and Designer';
+    $heroName = $owner->name ?? 'Badhon Sheikh';
+    $heroDesignation = $owner->designation ?? 'Full Stack Web Developer';
     $heroBio = $owner->bio ?? 'React, Django, and WordPress specialist with strong UI/UX design skills—creating fast, functional, and visually compelling digital experiences.';
     $heroCv = $owner?->cvUrl() ?? asset('mycv.pdf');
     $heroContact = $owner->contact_link ?? '#contact';

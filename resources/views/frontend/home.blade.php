@@ -4,8 +4,8 @@
      ============================================================ --}}
 @extends('layouts.app')
 
-@section('title', 'Joy Datta | Graphic Designer')
-@section('description', 'Portfolio of Joy Datta — Graphic Designer specializing in branding, UI/UX, and visual communication.')
+@section('title', 'Badhon Sheikh | Full Stack Web Developer')
+@section('description', 'Portfolio of Badhon Sheikh — Full Stack Web Developer specializing in creating dynamic, user-friendly web applications.')
 
 @section('content')
     @include('frontend.sections.hero')
