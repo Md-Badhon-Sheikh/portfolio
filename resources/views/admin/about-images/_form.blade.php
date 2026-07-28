@@ -13,6 +13,17 @@
     </div>
 
     <div>
+        <label for="type" class="mb-1.5 block text-sm font-medium text-heading">Slider</label>
+        <select id="type" name="type"
+            class="w-full max-w-xs rounded-xl border border-heading/10 bg-page px-4 py-3 text-sm text-heading outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 @error('type') border-red-400 @enderror">
+            <option value="education" {{ old('type', $image->type ?? 'education') === 'education' ? 'selected' : '' }}>Education tab</option>
+            <option value="bio" {{ old('type', $image->type ?? 'education') === 'bio' ? 'selected' : '' }}>Bio tab</option>
+        </select>
+        <p class="mt-1.5 text-xs text-body">Which About tab's slider this image appears in.</p>
+        @error('type') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
+    </div>
+
+    <div>
         <label for="alt" class="mb-1.5 block text-sm font-medium text-heading">Alt Text</label>
         <input type="text" id="alt" name="alt" value="{{ old('alt', $image->alt ?? '') }}"
             placeholder="Short description of the image"

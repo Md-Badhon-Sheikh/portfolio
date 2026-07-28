@@ -30,6 +30,8 @@ class HomeController extends Controller
         $educationEntries = EducationEntry::orderBy('sort_order')->orderBy('id')->get();
         $socialLinks = SocialLink::orderBy('sort_order')->orderBy('id')->get();
         $aboutImages = AboutImage::orderBy('sort_order')->orderBy('id')->get();
+        $educationImages = $aboutImages->where('type', AboutImage::TYPE_EDUCATION)->values();
+        $bioImages = $aboutImages->where('type', AboutImage::TYPE_BIO)->values();
         $contactInfos = ContactInfo::orderBy('sort_order')->orderBy('id')->get();
         $galleryImages = GalleryImage::orderBy('sort_order')->orderBy('id')->get();
         $experiences = Experience::orderBy('sort_order')->orderBy('id')->get();
@@ -44,7 +46,8 @@ class HomeController extends Controller
 
         return view('frontend.home', compact(
             'owner', 'stats', 'services', 'skills', 'educationEntries', 'socialLinks',
-            'aboutImages', 'contactInfos', 'projects', 'portfolioFilters', 'galleryImages', 'experiences'
+            'aboutImages', 'educationImages', 'bioImages', 'contactInfos', 'projects',
+            'portfolioFilters', 'galleryImages', 'experiences'
         ));
     }
 }

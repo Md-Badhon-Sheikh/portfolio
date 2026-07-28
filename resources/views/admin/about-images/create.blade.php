@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Bio Slider Image')
+@section('title', 'Add About Slider Image')
 
 @section('content')
     <div class="mb-8">
-        <h2 class="text-2xl font-bold text-heading">Add Bio Slider Image</h2>
-        <p class="mt-1 text-sm text-body">Add a new slide to the About &rarr; Bio tab.</p>
+        <h2 class="text-2xl font-bold text-heading">Add About Slider Image</h2>
+        <p class="mt-1 text-sm text-body">Add a new slide to the About &rarr; Education or Bio tab.</p>
     </div>
 
     <div class="card-surface max-w-xl p-6 sm:p-8">

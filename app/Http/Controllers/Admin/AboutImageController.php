@@ -12,7 +12,7 @@ use Illuminate\View\View;
 class AboutImageController extends Controller
 {
     /**
-     * Display a listing of the About → Bio slider images.
+     * Display a listing of the About → Education/Bio slider images.
      */
     public function index(): View
     {
@@ -36,6 +36,7 @@ class AboutImageController extends Controller
     {
         $validated = $request->validate([
             'image' => ['required', 'image', 'max:4096'],
+            'type' => ['required', 'in:education,bio'],
             'alt' => ['nullable', 'string', 'max:150'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
         ]);
@@ -62,6 +63,7 @@ class AboutImageController extends Controller
     {
         $validated = $request->validate([
             'image' => ['nullable', 'image', 'max:4096'],
+            'type' => ['required', 'in:education,bio'],
             'alt' => ['nullable', 'string', 'max:150'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
         ]);

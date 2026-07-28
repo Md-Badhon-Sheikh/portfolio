@@ -167,9 +167,11 @@ $(function () {
         if (tab === 'contact') {
             $('.about-slider-col').addClass('hidden');
             $('.about-left-col').addClass('lg:col-span-2');
+            Object.values(aboutSliderGroups).forEach(stopAboutAutoSlide);
         } else {
             $('.about-slider-col').removeClass('hidden');
             $('.about-left-col').removeClass('lg:col-span-2');
+            activateAboutSliderGroup(tab);
         }
 
         const $content = $('#about-tab-content');
@@ -189,33 +191,62 @@ $(function () {
     });
 
     /* ---------------------------------------------------------
-     * About: image slider
+     * About: image sliders (one per tab — Education / Bio —
+     * only the slider matching the active tab is shown/running)
      * ------------------------------------------------------- */
-    const $slides = $('.about-slide');
-    const $dots = $('.about-slider-dot');
-    let currentSlide = 0;
-    let sliderTimer = null;
+    const aboutSliderGroups = {};
 
-    function goToSlide(index) {
-        const total = $slides.length;
-        currentSlide = (index + total) % total;
+    $('.about-slider-group').each(function () {
+        const $group = $(this);
+        const tabKey = $group.data('slider-tab');
+        const $slides = $group.find('.about-slide');
+        const $dots = $group.find('.about-slider-dot');
 
-        $slides.removeClass('opacity-100').addClass('opacity-0');
-        $slides.eq(currentSlide).removeClass('opacity-0').addClass('opacity-100');
+        const group = { $group, $slides, $dots, current: 0, timer: null };
+        aboutSliderGroups[tabKey] = group;
 
-        $dots.removeClass('bg-orange-500 scale-110').addClass('bg-white/60');
-        $dots.eq(currentSlide).removeClass('bg-white/60').addClass('bg-orange-500 scale-110');
+        $dots.on('click', function () {
+            goToAboutSlide(group, $(this).data('slide'));
+            startAboutAutoSlide(group);
+        });
+    });
+
+    function goToAboutSlide(group, index) {
+        const total = group.$slides.length;
+        if (!total) return;
+        group.current = (index + total) % total;
+
+        group.$slides.removeClass('opacity-100').addClass('opacity-0');
+        group.$slides.eq(group.current).removeClass('opacity-0').addClass('opacity-100');
+
+        group.$dots.removeClass('bg-orange-500 scale-110').addClass('bg-white/60');
+        group.$dots.eq(group.current).removeClass('bg-white/60').addClass('bg-orange-500 scale-110');
     }
 
-    function startAutoSlide() {
-        clearInterval(sliderTimer);
-        sliderTimer = setInterval(() => goToSlide(currentSlide + 1), 5000);
+    function startAboutAutoSlide(group) {
+        clearInterval(group.timer);
+        if (group.$slides.length < 2) return;
+        group.timer = setInterval(() => goToAboutSlide(group, group.current + 1), 5000);
     }
 
-    if ($slides.length) {
-        $dots.on('click', function () { goToSlide($(this).data('slide')); startAutoSlide(); });
-        startAutoSlide();
+    function stopAboutAutoSlide(group) {
+        clearInterval(group.timer);
     }
+
+    function activateAboutSliderGroup(tabKey) {
+        Object.keys(aboutSliderGroups).forEach((key) => {
+            const group = aboutSliderGroups[key];
+            if (key === tabKey) {
+                group.$group.removeClass('hidden');
+                startAboutAutoSlide(group);
+            } else {
+                group.$group.addClass('hidden');
+                stopAboutAutoSlide(group);
+            }
+        });
+    }
+
+    activateAboutSliderGroup($('.about-tab-btn.border-orange-500').data('tab'));
 
     /* ---------------------------------------------------------
      * Portfolio filter (jQuery, no page reload)

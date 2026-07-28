@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Bio Slider Image')
+@section('title', 'Edit About Slider Image')
 
 @section('content')
     <div class="mb-8">
-        <h2 class="text-2xl font-bold text-heading">Edit Bio Slider Image</h2>
-        <p class="mt-1 text-sm text-body">Update this slide in the About &rarr; Bio tab.</p>
+        <h2 class="text-2xl font-bold text-heading">Edit About Slider Image</h2>
+        <p class="mt-1 text-sm text-body">Update this slide in the About &rarr; Education or Bio tab.</p>
     </div>
 
     <div class="card-surface max-w-xl p-6 sm:p-8">

@@ -22,7 +22,6 @@
                 <thead class="border-b border-heading/10 text-xs uppercase tracking-wide text-body">
                     <tr>
                         <th class="px-6 py-4 font-medium">Order</th>
-                        <th class="px-6 py-4 font-medium">Image</th>
                         <th class="px-6 py-4 font-medium">Title</th>
                         <th class="px-6 py-4 font-medium">Details</th>
                         <th class="px-6 py-4 font-medium text-right">Actions</th>
@@ -32,13 +31,7 @@
                     @foreach ($entries as $entry)
                         <tr>
                             <td class="px-6 py-4 text-body">{{ $entry->sort_order }}</td>
-                            <td class="px-6 py-4">
-                                @if ($entry->imageUrl())
-                                    <img src="{{ $entry->imageUrl() }}" alt="{{ $entry->title }}" class="h-10 w-10 rounded-lg object-cover">
-                                @else
-                                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-page text-body/50">—</span>
-                                @endif
-                            </td>
+                           
                             <td class="px-6 py-4 font-semibold text-heading">{{ $entry->title }}</td>
                             <td class="px-6 py-4 max-w-md truncate text-body">{{ str_replace("\n", ' · ', $entry->details) }}</td>
                             <td class="px-6 py-4">

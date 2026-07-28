@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class AboutImage extends Model
 {
-    protected $fillable = ['image', 'alt', 'sort_order'];
+    public const TYPE_EDUCATION = 'education';
+    public const TYPE_BIO = 'bio';
+
+    protected $fillable = ['image', 'type', 'alt', 'sort_order'];
 
     /**
      * Public URL for this slide's image.

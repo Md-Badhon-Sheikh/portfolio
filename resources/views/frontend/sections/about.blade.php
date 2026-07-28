@@ -41,14 +41,12 @@
                 <div id="about-tab-content" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start animate-fade-in">
 
                     {{-- Left: tab panels --}}
-                    <div class="about-left-col {{ $aboutImages->isEmpty() ? 'lg:col-span-2' : '' }}">
+                    <div class="about-left-col {{ $educationImages->isEmpty() && $bioImages->isEmpty() ? 'lg:col-span-2' : '' }}">
                         {{-- Education panel --}}
                         <div class="about-tab-panel space-y-10" data-panel="education">
                             @forelse ($educationEntries as $entry)
                                 <div class="flex gap-5">
-                                    @if ($entry->imageUrl())
-                                        <img src="{{ $entry->imageUrl() }}" alt="{{ $entry->title }}" class="h-16 w-16 shrink-0 rounded-lg object-cover">
-                                    @endif
+                                  
                                     <div>
                                         <h3 class="text-2xl font-bold text-slate-900 mb-4">{{ $entry->title }}:</h3>
                                         <ul class="space-y-2 text-slate-600 list-disc list-inside">
@@ -120,22 +118,18 @@
                         </div>
                     </div>
 
-                    {{-- Right: image slider (Bio slider images, managed under /about-images) --}}
-                    @if ($aboutImages->isNotEmpty())
+                    {{-- Right: image slider (Education/Bio slider images, managed under /about-images).
+                         Both tabs share the same slider partial/component and JS logic — only the
+                         data (and which one starts visible) differs. --}}
+                    @if ($educationImages->isNotEmpty() || $bioImages->isNotEmpty())
                         <div class="about-slider-col lg:sticky lg:top-12">
-                            <div class="relative h-80 sm:h-96 w-full rounded-xl overflow-hidden shadow-lg group">
-                                @foreach ($aboutImages as $i => $slide)
-                                    <div class="about-slide absolute inset-0 transition-opacity duration-1000 ease-in-out {{ $i === 0 ? 'opacity-100' : 'opacity-0' }}">
-                                        <img src="{{ $slide->imageUrl() }}" alt="{{ $slide->alt }}" class="w-full h-full object-cover">
-                                    </div>
-                                @endforeach
+                            @if ($educationImages->isNotEmpty())
+                                @include('frontend.sections.partials.about-slider', ['tabKey' => 'education', 'images' => $educationImages, 'hidden' => false])
+                            @endif
 
-                                <div id="about-slider-dots" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
-                                    @foreach ($aboutImages as $i => $slide)
-                                        <button type="button" class="about-slider-dot w-3 h-3 rounded-full transition-all duration-300 shadow-sm {{ $i === 0 ? 'bg-orange-500 scale-110' : 'bg-white/60 hover:bg-white' }}" data-slide="{{ $i }}" aria-label="Go to slide {{ $i + 1 }}"></button>
-                                    @endforeach
-                                </div>
-                            </div>
+                            @if ($bioImages->isNotEmpty())
+                                @include('frontend.sections.partials.about-slider', ['tabKey' => 'bio', 'images' => $bioImages, 'hidden' => true])
+                            @endif
                         </div>
                     @endif
                 </div>
